@@ -9,9 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Main Menu.unity
     guid: 4b9b4f588221f9b44ad452a3c42b7d72
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
     path: Assets/Scenes/Testing.unity
     guid: f3a717393e971d44ba56257ae6d8545e
   - enabled: 1
@@ -20,4 +17,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level 3.unity
     guid: 339beb905f6daf64793f665bc2bae12b
+  - enabled: 1
+    path: Assets/Scenes/Shoping area.unity
+    guid: 79bd3e5484d1ea54aa1295dfc30c7e24
+  - enabled: 1
+    path: Assets/Scenes/TD testing 2.unity
+    guid: 6cac4985485b8c94e9c3dd5b933d6c39
   m_configObjects: {}
