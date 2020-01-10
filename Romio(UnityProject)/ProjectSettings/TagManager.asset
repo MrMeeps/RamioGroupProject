@@ -8,6 +8,7 @@ TagManager:
   - NL2
   - NL3
   - SA
+  - Death
   layers:
   - Default
   - TransparentFX

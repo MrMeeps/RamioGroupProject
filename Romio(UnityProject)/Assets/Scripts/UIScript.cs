@@ -37,7 +37,7 @@ public class UIScript : MonoBehaviour
     public void StartGame()
     {
         PlayerPrefs.SetInt("lives", 3);
-        SceneManager.LoadScene("Testing");
+        SceneManager.LoadScene("Level 1");
     }
     #endregion
     #region EXIT GAME FUNCTION
