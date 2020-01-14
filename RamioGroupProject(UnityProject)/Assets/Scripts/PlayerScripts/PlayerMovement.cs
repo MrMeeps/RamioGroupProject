@@ -3,6 +3,7 @@ public class PlayerMovement : MonoBehaviour
 {
     #region VARIABLES
     [Header("Movement Settings")]
+    public bool movementOn = true;
     public float moveSpeed = 10;
     public float jumpSpeed = 1;
     public float fallMultiplier = 2.5f;
@@ -37,9 +38,12 @@ public class PlayerMovement : MonoBehaviour
             GetComponent<Rigidbody2D>().velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
         //Movement
         float moveX = Input.GetAxis("Horizontal");
-        Vector2 velocity = GetComponent<Rigidbody2D>().velocity;
-        velocity.x = moveSpeed * moveX;
-        GetComponent<Rigidbody2D>().velocity = velocity;
+        if (movementOn == true)
+        {
+            Vector2 velocity = GetComponent<Rigidbody2D>().velocity;
+            velocity.x = moveSpeed * moveX;
+            GetComponent<Rigidbody2D>().velocity = velocity;
+        }
         //Flipping character
         if (moveX > 0 && !facingRight)
             Flip();

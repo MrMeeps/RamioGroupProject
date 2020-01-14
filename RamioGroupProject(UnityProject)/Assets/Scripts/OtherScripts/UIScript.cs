@@ -1,11 +1,15 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+public enum UIOptions { MainMenu, PauseMenu, Fade }
 public class UIScript : MonoBehaviour
 {
     #region VARIABLES
-    public enum UIOptions{MainMenu, PauseMenu}
+    [Header("UI Settings")]
     public UIOptions UI;
     bool pauseOn;
+    [Header("Animation Settings")]
+    public Animator animator;
+    GameObject player;
     #endregion
     //UNITY FUNCTIONS
     #region START FUNCTION
@@ -13,6 +17,8 @@ public class UIScript : MonoBehaviour
     {
         if (UI == UIOptions.PauseMenu)
             GetComponent<Canvas>().enabled = false;
+        if(UI == UIOptions.Fade)
+            player = GameObject.Find("Player");
     }
     #endregion
     #region UPDATE FUNCTION
@@ -32,13 +38,13 @@ public class UIScript : MonoBehaviour
         }
     }
     #endregion
-    //MAIN MENU FUNCTIONS
+    //UI FUNCTIONS
     #region START GAME FUNCTION
     public void StartGame()
     {
         PlayerPrefs.SetInt("lives", 3);
         PlayerPrefs.SetInt("level", 1);
-        SceneManager.LoadScene("Town");
+        animator.SetTrigger("FadeOut");
     }
     #endregion
     #region EXIT GAME FUNCTION
@@ -47,7 +53,6 @@ public class UIScript : MonoBehaviour
         Application.Quit();
     }
     #endregion
-    //PAUSE MENU FUNCTIONS
     #region RESUME FUNCTION
     public void Resume()
     {
@@ -69,6 +74,17 @@ public class UIScript : MonoBehaviour
         SceneManager.LoadScene("Main Menu");
         GetComponent<Canvas>().enabled = false;
         Time.timeScale = 1;
+    }
+    #endregion
+    #region ON FADE COMPLETE FUNCTION
+    public void OnFadeComplete() 
+    { 
+        if(UI == UIOptions.MainMenu)
+            SceneManager.LoadScene("Town");
+        else if (UI == UIOptions.Fade && player.GetComponent<PlayerHealth>().loadTown == false)
+            SceneManager.LoadScene("Level " + player.GetComponent<PlayerHealth>().level);
+        else if (UI == UIOptions.Fade && player.GetComponent<PlayerHealth>().loadTown == true)
+            SceneManager.LoadScene("Town");
     }
     #endregion
 }

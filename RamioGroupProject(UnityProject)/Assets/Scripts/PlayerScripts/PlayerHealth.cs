@@ -8,10 +8,14 @@ public class PlayerHealth : MonoBehaviour
     public int maxHealth = 5;
     public int currentHealth;
     public int lives;
+    [Header("Level Settings")]
+    public Animator animator;
+    public bool nextLevel;
+    public int level;
+    public bool loadTown;
     [Header("Testing Only")]
     public bool LifeTesting;
-    int level;
-    bool nextLevel;
+
     #endregion
     //UNITY FUNCTIONS
     #region START FUNCTION
@@ -25,13 +29,20 @@ public class PlayerHealth : MonoBehaviour
     #region UPDATE FUNCTION
     void Update()
     {
+        //Lives testing
         if (LifeTesting == true && Input.GetKeyDown(KeyCode.DownArrow))
         {
             PlayerPrefs.SetInt("lives", 3);
             lives = PlayerPrefs.GetInt("lives");
         }
-        if(nextLevel == true)
-            GetComponent<Rigidbody2D>().velocity = new Vector2((1 * GetComponent<PlayerMovement>().moveSpeed), 0);
+        //Movement transition to next level
+        if (nextLevel == true)
+        {
+            GetComponent<PlayerMovement>().movementOn = false;
+            Vector2 velocity = GetComponent<Rigidbody2D>().velocity;
+            velocity.x = GetComponent<PlayerMovement>().moveSpeed * 1;
+            GetComponent<Rigidbody2D>().velocity = velocity;
+        }
     }
     #endregion
     #region ON COLLISION ENTER 2D FUNCTION
@@ -47,7 +58,10 @@ public class PlayerHealth : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy Arrow"))
             TakeDamage(collision.gameObject.GetComponent<ArrowScript>().attackDamage);
         if (collision.gameObject.CompareTag("Town"))
-            SceneManager.LoadScene("Town");
+        {
+            loadTown = true;
+            animator.SetTrigger("FadeOut");
+        }
         else if (collision.gameObject.CompareTag("NextLevel"))
             StartCoroutine(LoadLevel(collision));
     }
@@ -71,16 +85,14 @@ public class PlayerHealth : MonoBehaviour
     #region LOAD LEVEL
     IEnumerator LoadLevel(Collider2D trigger)
     {
-        print("Working");
         GameObject disableTrigger = trigger.gameObject;
         disableTrigger.SetActive(false);
         GetComponentInChildren<Camera>().transform.parent = null;
-        //GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
         nextLevel = true;
         level++;
         PlayerPrefs.SetInt("level", level);
         yield return new WaitForSeconds(2f);
-        SceneManager.LoadScene("Level " + level);
+        animator.SetTrigger("FadeOut");
     }
     #endregion
 }
