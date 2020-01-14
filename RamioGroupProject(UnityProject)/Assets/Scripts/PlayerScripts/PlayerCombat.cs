@@ -10,6 +10,7 @@ public class PlayerCombat : MonoBehaviour
     public float attackRange = 0.5f;
     public LayerMask enemyLayer;
     [Header("Ranged Attack Settings")]
+    public bool straightArrows;
     public Transform firePoint;
     public GameObject arrowPrefab;
     [Header("Delay Settings")]
@@ -60,12 +61,27 @@ public class PlayerCombat : MonoBehaviour
         //Shoot
         if (weapon.weaponType == Weapon.Weapons.bow)
         {
-            Vector2 mousePosition = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
-            Vector2 firePointPosition = new Vector2(firePoint.position.x, firePoint.position.y);
             GameObject arrow = Instantiate(arrowPrefab, firePoint.position, firePoint.rotation);
-            arrow.GetComponent<Rigidbody2D>().velocity = (mousePosition - firePointPosition) * speed;
-            arrow.AddComponent<ArrowScript>().attackDamage = attackDamage;
-            attackTimer = 0;
+            switch (straightArrows)
+            {
+                case true:
+                    Vector2 shootDir;
+                    if(GetComponent<PlayerMovement>().facingRight)
+                        shootDir = new Vector2(1, 0);
+                    else
+                        shootDir = new Vector2(-1, 0);
+                    arrow.GetComponent<Rigidbody2D>().velocity = shootDir * speed;
+                    arrow.AddComponent<ArrowScript>().attackDamage = attackDamage;
+                    attackTimer = 0;
+                    break;
+                case false:
+                    Vector2 mousePosition = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
+                    Vector2 firePointPosition = new Vector2(firePoint.position.x, firePoint.position.y);
+                    arrow.GetComponent<Rigidbody2D>().velocity = (mousePosition - firePointPosition) * speed;
+                    arrow.AddComponent<ArrowScript>().attackDamage = attackDamage;
+                    attackTimer = 0;
+                    break;
+            }
         }
     }
     #endregion
