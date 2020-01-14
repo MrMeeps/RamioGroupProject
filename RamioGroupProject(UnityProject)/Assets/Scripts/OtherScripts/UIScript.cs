@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
-public enum UIOptions { MainMenu, PauseMenu, Fade }
+public enum UIOptions { MainMenu, PauseMenu, Fade, Shop, ShopPrompt }
 public class UIScript : MonoBehaviour
 {
     #region VARIABLES
@@ -19,11 +19,17 @@ public class UIScript : MonoBehaviour
             GetComponent<Canvas>().enabled = false;
         if(UI == UIOptions.Fade)
             player = GameObject.Find("Player");
+        if (UI == UIOptions.ShopPrompt)
+        {
+            player = GameObject.Find("Player");
+            GetComponentInParent<Canvas>().enabled = false;
+        }
     }
     #endregion
     #region UPDATE FUNCTION
     void Update()
     {
+        //Pausing
         if (Input.GetKeyDown(KeyCode.Escape) && pauseOn == false && UI == UIOptions.PauseMenu)
         {
             GetComponent<Canvas>().enabled = true;
@@ -35,6 +41,17 @@ public class UIScript : MonoBehaviour
             GetComponent<Canvas>().enabled = false;
             Time.timeScale = 1;
             pauseOn = false;
+        }
+        //Shop Prompt
+        if (UI == UIOptions.ShopPrompt && player.GetComponent<PlayerCollision>().InShop == true)
+        {
+            animator.SetBool("InShopTrigger", true);
+            GetComponentInParent<Canvas>().enabled = true;
+        }
+        else if (UI == UIOptions.ShopPrompt)
+        {
+            animator.SetBool("InShopTrigger", false);
+            GetComponentInParent<Canvas>().enabled = false;
         }
     }
     #endregion
@@ -81,9 +98,9 @@ public class UIScript : MonoBehaviour
     { 
         if(UI == UIOptions.MainMenu)
             SceneManager.LoadScene("Town");
-        else if (UI == UIOptions.Fade && player.GetComponent<PlayerHealth>().loadTown == false)
-            SceneManager.LoadScene("Level " + player.GetComponent<PlayerHealth>().level);
-        else if (UI == UIOptions.Fade && player.GetComponent<PlayerHealth>().loadTown == true)
+        else if (UI == UIOptions.Fade && player.GetComponent<PlayerCollision>().loadTown == false)
+            SceneManager.LoadScene("Level " + player.GetComponent<PlayerCollision>().level);
+        else if (UI == UIOptions.Fade && player.GetComponent<PlayerCollision>().loadTown == true)
             SceneManager.LoadScene("Town");
     }
     #endregion

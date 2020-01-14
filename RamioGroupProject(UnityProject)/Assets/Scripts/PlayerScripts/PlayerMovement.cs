@@ -10,6 +10,8 @@ public class PlayerMovement : MonoBehaviour
     public float lowJumpMultiplier = 2.5f;
     [HideInInspector] public bool facingRight = true;
     bool grounded = false;
+    [Header("Animation Settings")]
+    public Animator animator;
     [Header("Testing Only")]
     public bool cameraFollowTest;
     new Transform camera;
@@ -37,12 +39,15 @@ public class PlayerMovement : MonoBehaviour
         else if (GetComponent<Rigidbody2D>().velocity.y > 0 && !Input.GetKey(KeyCode.Space))
             GetComponent<Rigidbody2D>().velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
         //Movement
+        animator.SetBool("grounded", grounded);
         float moveX = Input.GetAxis("Horizontal");
         if (movementOn == true)
         {
             Vector2 velocity = GetComponent<Rigidbody2D>().velocity;
             velocity.x = moveSpeed * moveX;
             GetComponent<Rigidbody2D>().velocity = velocity;
+            animator.SetFloat("x", velocity.x);
+            animator.SetFloat("y", velocity.y);
         }
         //Flipping character
         if (moveX > 0 && !facingRight)
