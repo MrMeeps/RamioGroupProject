@@ -20,7 +20,7 @@ public class ShoppingMenu : MonoBehaviour
                 break;
             case MenuType.Weapon:
                 break;
-            case MenuType.Armor;
+            case MenuType.Armor:
                 break;
         }
 
