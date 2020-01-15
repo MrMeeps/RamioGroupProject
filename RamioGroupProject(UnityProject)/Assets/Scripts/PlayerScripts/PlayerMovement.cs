@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     #region VARIABLES
@@ -9,9 +10,10 @@ public class PlayerMovement : MonoBehaviour
     public float fallMultiplier = 2.5f;
     public float lowJumpMultiplier = 2.5f;
     [HideInInspector] public bool facingRight = true;
-    bool grounded = false;
+    public bool grounded = false;
     [Header("Animation Settings")]
     public Animator animator;
+    public float jump_A_Duration;
     [Header("Testing Only")]
     public bool cameraFollowTest;
     new Transform camera;
@@ -33,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
     {
         //Jumping
         if (Input.GetButtonDown("Jump") && grounded == true)
-            GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 100 * jumpSpeed));
+            StartCoroutine(Jump());
         if (GetComponent<Rigidbody2D>().velocity.y < 0)
             GetComponent<Rigidbody2D>().velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
         else if (GetComponent<Rigidbody2D>().velocity.y > 0 && !Input.GetKey(KeyCode.Space))
@@ -77,6 +79,16 @@ public class PlayerMovement : MonoBehaviour
     void OnTriggerExit2D(Collider2D collision) { grounded &= collision.gameObject.layer != 0; }
     #endregion
     //MOVEMENT FUNCTIONS
+    #region JUMP FUNCTION
+    IEnumerator Jump()
+    {
+        animator.SetTrigger("Jump");
+        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+        yield return new WaitForSeconds(jump_A_Duration);
+        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+        GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 100 * jumpSpeed));
+    }
+    #endregion
     #region FLIP FUNCTION
     void Flip()
     {
