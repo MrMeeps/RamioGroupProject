@@ -8,6 +8,8 @@ public class PlayerCollision : MonoBehaviour
     public int maxHealth = 5;
     public int currentHealth;
     public int lives;
+    [Header("Coin Settings")]
+    public int coins;
     [Header("Level Settings")]
     public Animator animator;
     public Animator playerAC;
@@ -80,6 +82,12 @@ public class PlayerCollision : MonoBehaviour
         //Death
         if (collision.gameObject.CompareTag("Death"))
             StartCoroutine(CameraDeath());
+        //Coin Collecting
+        if(collision.gameObject.CompareTag("Coin"))
+        {
+            coins++;
+            Destroy(collision.gameObject);
+        }
     }
     #endregion
     #region ON TRIGGER EXIT 2D FUNCTION

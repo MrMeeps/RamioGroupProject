@@ -12,6 +12,7 @@ TagManager:
   - Shop
   - CameraZoom
   - Death
+  - Coin
   layers:
   - Default
   - TransparentFX

@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Testing Only")]
     public bool cameraFollowTest;
     new Transform camera;
+    bool onStart;
     #endregion
     //UNTIY FUNCTIONS
     #region START FUNCTION
@@ -30,11 +31,15 @@ public class PlayerMovement : MonoBehaviour
             camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Transform>();
             camera.transform.parent = null;
         }
+        onStart = true;
     }
     #endregion
     #region UPDATE FUNCTION
     void Update()
     {
+        //On Start
+        if (onStart == true)
+            StartCoroutine(OnStart());
         //Jumping
         if (Input.GetButtonDown("Jump") && grounded == true)
             StartCoroutine(Jump());
@@ -57,9 +62,9 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftShift))
             SlowMo();
         //Flipping character
-        if (moveX > 0 && !facingRight)
+        if (moveX > 0 && !facingRight && movementOn)
             Flip();
-        else if (moveX < 0 && facingRight)
+        else if (moveX < 0 && facingRight && movementOn)
             Flip();
         //Camera movement
         if (cameraFollowTest == true)
@@ -116,6 +121,20 @@ public class PlayerMovement : MonoBehaviour
             Time.timeScale = 1;
             slowMoOn = false;
         }
+    }
+    #endregion
+    #region ON START FUNCTION
+    IEnumerator OnStart()
+    {
+        movementOn = false;
+        Vector2 velocity = GetComponent<Rigidbody2D>().velocity;
+        velocity.x = GetComponent<PlayerMovement>().moveSpeed * 1;
+        GetComponent<Rigidbody2D>().velocity = velocity;
+        animator.SetFloat("x", velocity.x);
+        animator.SetFloat("y", velocity.y);
+        yield return new WaitForSeconds(2f);
+        movementOn = true;
+        onStart = false;
     }
     #endregion
 }
