@@ -8,13 +8,18 @@ public class PlayerTutorial : MonoBehaviour
     int arrayNum = 5;
     float timer;
     bool timeStart;
+    [Header("UI Elements")]
+    GameObject playerLoadOut;
+    GameObject slowMoSlider;
     #endregion
     //UNITY FUNCTION
     #region START FUNCTION
     void Start()
     {
         for(int i = 0; int < 4; i++)
-            tips[i].SetActive(false)
+            tips[i].SetActive(false);
+        playerLoadOut.SetActive(false);
+        slowMoSlider.SetActive(false);
     }
     #endregion
     #region UPDATE FUNCTION
@@ -60,6 +65,7 @@ public class PlayerTutorial : MonoBehaviour
                 break;
             Case 3:
                 tips[arrayNum].SetActive(true);
+                playerLoadOut.SetActive(true);
                 if(Input.GetKeyDown(KeyCode.Keypad2))
                 {
                     timer += Time.deltaTime
@@ -72,6 +78,7 @@ public class PlayerTutorial : MonoBehaviour
                 break;
             Case 4:
                 tips[arrayNum].SetActive(true);
+                slowMoSlider.SetActive(true);
                 if(Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
                 {
                     timer += Time.deltaTime
