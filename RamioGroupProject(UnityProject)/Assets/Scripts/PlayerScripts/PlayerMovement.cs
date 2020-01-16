@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
@@ -59,7 +59,7 @@ public class PlayerMovement : MonoBehaviour
             animator.SetFloat("y", velocity.y);
         }
         //Slow-Mo
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
             SlowMo();
         //Flipping character
         if (moveX > 0 && !facingRight && movementOn)
