@@ -21,7 +21,7 @@ public class CameraZoom : MonoBehaviour
     {
         if (GetComponentInParent<PlayerCollision>().camZoom == true)
             GetComponent<Camera>().orthographicSize = Mathf.Lerp(GetComponent<Camera>().orthographicSize, zoomed, Time.deltaTime * smooth);
-        else if(GetComponentInParent<PlayerMovement>().slowMoOn == true)
+        else if(GetComponentInParent<PlayerSlowMo>().slowMoOn == true)
             GetComponent<Camera>().orthographicSize = Mathf.Lerp(GetComponent<Camera>().orthographicSize, slowMoZoom, Time.deltaTime * smooth);
         else
             GetComponent<Camera>().orthographicSize = Mathf.Lerp(GetComponent<Camera>().orthographicSize, normal, Time.deltaTime * smooth);
