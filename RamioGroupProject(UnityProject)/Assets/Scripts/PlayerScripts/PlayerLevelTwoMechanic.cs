@@ -13,8 +13,8 @@ public class PlayerLevelTwoMechanic
   #region UPDATE FUNCTION
   void Update()
   {
-      coins = GetComponent<PlayerCollision>().coins;
-      lightOuterRadius = MathF.Lerp(GetComponentInChildren<Light2D>().outerRadius,
+      //coins = GetComponent<PlayerCollision>().coins;
+      //lightOuterRadius = MathF.Lerp(GetComponentInChildren<Light2D>().outerRadius,
   }
   #endregion
 }

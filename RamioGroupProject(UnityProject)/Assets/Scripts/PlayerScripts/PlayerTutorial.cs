@@ -7,7 +7,7 @@ public class PlayerTutorial : MonoBehaviour
     public Text[] tips = new Text[4];
     int arrayNum = 5;
     float timer;
-    bool timeStart;
+    public bool timeStart;
     [Header("UI Elements")]
     GameObject playerLoadOut;
     GameObject slowMoSlider;
@@ -16,10 +16,10 @@ public class PlayerTutorial : MonoBehaviour
     #region START FUNCTION
     void Start()
     {
-        for(int i = 0; int < 4; i++)
-            tips[i].SetActive(false);
-        playerLoadOut.SetActive(false);
-        slowMoSlider.SetActive(false);
+        for(int i = 0; i < 4; i++)
+            tips[i].gameObject.SetActive(false);
+        playerLoadOut.gameObject.SetActive(false);
+        slowMoSlider.gameObject.SetActive(false);
     }
     #endregion
     #region UPDATE FUNCTION
@@ -27,8 +27,8 @@ public class PlayerTutorial : MonoBehaviour
     {
         switch(arrayNum)
         {
-            Case 0:
-                tips[arrayNum].SetActive(true);
+            case 0:
+                tips[arrayNum].gameObject.SetActive(true);
                 if(Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow))
                 {
                     timer += Time.deltaTime;
@@ -39,8 +39,8 @@ public class PlayerTutorial : MonoBehaviour
                     }
                 }
                 break;
-            Case 1:
-                tips[arrayNum].SetActive(true);
+            case 1:
+                tips[arrayNum].gameObject.SetActive(true);
                 if(Input.GetKeyDown(KeyCode.Space))
                 {
                     timer += Time.deltaTime;
@@ -51,11 +51,11 @@ public class PlayerTutorial : MonoBehaviour
                     }
                 }
                 break;
-            Case 2:
-                tips[arrayNum].SetActive(true);
+            case 2:
+                tips[arrayNum].gameObject.SetActive(true);
                 if(Input.GetKeyDown(KeyCode.Mouse0))
                 {
-                    timer += Time.deltaTime
+                    timer += Time.deltaTime;
                     if(timer > 1f)
                     {
                         arrayNum = 5;
@@ -63,12 +63,12 @@ public class PlayerTutorial : MonoBehaviour
                     }
                 }
                 break;
-            Case 3:
-                tips[arrayNum].SetActive(true);
+            case 3:
+                tips[arrayNum].gameObject.SetActive(true);
                 playerLoadOut.SetActive(true);
                 if(Input.GetKeyDown(KeyCode.Keypad2))
                 {
-                    timer += Time.deltaTime
+                    timer += Time.deltaTime;
                     if(timer > 1f)
                     {
                         arrayNum = 5;
@@ -76,12 +76,12 @@ public class PlayerTutorial : MonoBehaviour
                     }
                 }
                 break;
-            Case 4:
-                tips[arrayNum].SetActive(true);
+            case 4:
+                tips[arrayNum].gameObject.SetActive(true);
                 slowMoSlider.SetActive(true);
                 if(Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
                 {
-                    timer += Time.deltaTime
+                    timer += Time.deltaTime;
                     if(timer > 1f)
                     {
                         arrayNum = 5;
@@ -89,33 +89,34 @@ public class PlayerTutorial : MonoBehaviour
                     }
                 }
                 break;
-            Case 5:
-                tips[0,1,2,3,4].SetActive(false):
+            case 5:
+                tips[0].gameObject.SetActive(false);
+                tips[1].gameObject.SetActive(false);
+                tips[2].gameObject.SetActive(false);
+                tips[3].gameObject.SetActive(false);
+                tips[4].gameObject.SetActive(false);
                 break;            
-            Case Default:
-                tips[0,1,2,3,4].SetActive(false):
-                break;
         }
     }
     #endregion
     #region ON TRIGGER ENTER 2D FUNCTION
-    void OnTriggerEnter2D()
+    void OnTriggerEnter2D(Collider2D collision)
     {
-        switch(colision.gameObject.name)
+        switch(collision.gameObject.name)
         {
-            Case "MovingTipTrigger":
+            case "MovingTipTrigger":
                 arrayNum = 0;
                 break;
-            Case "JumpingTipTrigger":
+            case "JumpingTipTrigger":
                 arrayNum = 1;
                 break;
-            Case "AttackTipTrigger":
+            case "AttackTipTrigger":
                 arrayNum = 2;
                 break;
-            Case "SwitchingWeaponsTipTrigger":
+            case "SwitchingWeaponsTipTrigger":
                 arrayNum = 3;
                 break;
-            Case "SlowMoTipTrigger":
+            case "SlowMoTipTrigger":
                 arrayNum = 4;
                 break;
         }

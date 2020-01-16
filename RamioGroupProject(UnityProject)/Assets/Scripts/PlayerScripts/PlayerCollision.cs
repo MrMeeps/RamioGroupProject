@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 public class PlayerCollision : MonoBehaviour
 {
     #region VARIABLES
@@ -36,7 +37,7 @@ public class PlayerCollision : MonoBehaviour
         healthSlider.maxValue = maxHealth;
         healthSlider.value = currentHealth;
         livesText.text = "Lives: " + lives;
-        coinText.text = coins;
+        coinText.text = "" + coins;
     }
     #endregion
     #region UPDATE FUNCTION
@@ -94,7 +95,7 @@ public class PlayerCollision : MonoBehaviour
         if(collision.gameObject.CompareTag("Coin"))
         {
             coins++;
-            coinText.text = coins;
+            coinText.text = "" + coins;
             PlayerPrefs.SetInt("coins", coins);
             Destroy(collision.gameObject);
         }

@@ -39,7 +39,10 @@ public class PlayerCombat : MonoBehaviour
         else
             animator.SetBool("Sword", false);
         attackDamage = weapon.damage;
-
+        if (Input.GetKeyDown(KeyCode.Keypad2))
+            weapon.weaponType = weapon.weaponType = Weapon.Weapons.bow;
+        else if (Input.GetKeyDown(KeyCode.Keypad1))
+            weapon.weaponType = weapon.weaponType = Weapon.Weapons.sword;
     }
     #endregion
     #region ON DRAW GIZMO SELECTED FUNCTION
