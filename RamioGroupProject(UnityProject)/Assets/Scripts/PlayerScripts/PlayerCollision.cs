@@ -8,8 +8,11 @@ public class PlayerCollision : MonoBehaviour
     public int maxHealth = 5;
     public int currentHealth;
     public int lives;
+    public Slider healthSlider;
+    public Text livesText;
     [Header("Coin Settings")]
     public int coins;
+    public Text coinText;
     [Header("Level Settings")]
     public Animator animator;
     public Animator playerAC;
@@ -29,6 +32,11 @@ public class PlayerCollision : MonoBehaviour
         currentHealth = maxHealth;
         lives = PlayerPrefs.GetInt("lives");
         level = PlayerPrefs.GetInt("level");
+        coins = PlayerPrefs.GetInt("coins");
+        healthSlider.maxValue = maxHealth;
+        healthSlider.value = currentHealth;
+        livesText.text = "Lives: " + lives;
+        coinText.text = coins;
     }
     #endregion
     #region UPDATE FUNCTION
@@ -86,6 +94,8 @@ public class PlayerCollision : MonoBehaviour
         if(collision.gameObject.CompareTag("Coin"))
         {
             coins++;
+            coinText.text = coins;
+            PlayerPrefs.SetInt("coins", coins);
             Destroy(collision.gameObject);
         }
     }
@@ -102,6 +112,7 @@ public class PlayerCollision : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
+        healthSlider.value = currentHealth;
         if (currentHealth < 1)
         {
             PlayerPrefs.SetInt("lives", lives - 1);
