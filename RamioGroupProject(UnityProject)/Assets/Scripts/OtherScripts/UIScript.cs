@@ -61,6 +61,7 @@ public class UIScript : MonoBehaviour
     {
         PlayerPrefs.SetInt("lives", 3);
         PlayerPrefs.SetInt("level", 1);
+        PlayerPrefs.SetInt("coins", 0);
         animator.SetTrigger("FadeOut");
     }
     #endregion
