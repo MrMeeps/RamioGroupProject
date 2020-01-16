@@ -58,9 +58,6 @@ public class PlayerMovement : MonoBehaviour
             animator.SetFloat("x", velocity.x);
             animator.SetFloat("y", velocity.y);
         }
-        //Slow-Mo
-        if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
-            SlowMo();
         //Flipping character
         if (moveX > 0 && !facingRight && movementOn)
             Flip();
@@ -106,21 +103,6 @@ public class PlayerMovement : MonoBehaviour
         Vector3 theScale = transform.localScale;
         theScale.x *= -1;
         transform.localScale = theScale;
-    }
-    #endregion
-    #region SLOW MO FUNCTION
-    void SlowMo()
-    {
-        if(slowMoOn == false)
-        {
-            Time.timeScale = 0.6f;
-            slowMoOn = true;
-        }
-        else
-        {
-            Time.timeScale = 1;
-            slowMoOn = false;
-        }
     }
     #endregion
     #region ON START FUNCTION
