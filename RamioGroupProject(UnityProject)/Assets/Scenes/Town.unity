@@ -274,7 +274,7 @@ GameObject:
   m_Component:
   - component: {fileID: 190131792}
   - component: {fileID: 190131793}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ShopTrigger(Potions)
   m_TagString: Shop
   m_Icon: {fileID: 0}
@@ -486,31 +486,6 @@ MonoBehaviour:
   - {fileID: 2063624774}
   - {fileID: 620769029}
   smoothing: 1
---- !u!1 &311351888 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1443919708741246170, guid: 8950f5268d558b449b848f81f8a33641,
-    type: 3}
-  m_PrefabInstance: {fileID: 1415442642}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &311351897
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 311351888}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 615cbe49935b67c4387b37a1d5a549ac, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &358182993
 GameObject:
   m_ObjectHideFlags: 0
@@ -1407,9 +1382,9 @@ GameObject:
   m_Component:
   - component: {fileID: 573097095}
   - component: {fileID: 573097096}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: NextLevelTrigger
-  m_TagString: NextLevel
+  m_TagString: Shop
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2097,7 +2072,7 @@ GameObject:
   m_Component:
   - component: {fileID: 897624914}
   - component: {fileID: 897624915}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ShopTrigger (Armor)
   m_TagString: Shop
   m_Icon: {fileID: 0}
@@ -2371,18 +2346,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 950142554}
   m_CullTransparentMesh: 0
---- !u!4 &968731671 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3473391029220655974, guid: 8950f5268d558b449b848f81f8a33641,
-    type: 3}
-  m_PrefabInstance: {fileID: 1415442642}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &992703210 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3473391029045571767, guid: 8950f5268d558b449b848f81f8a33641,
-    type: 3}
-  m_PrefabInstance: {fileID: 1415442642}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1120054641
 GameObject:
   m_ObjectHideFlags: 0
@@ -2393,7 +2356,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1120054642}
   - component: {fileID: 1120054643}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ShopTrigger(Weapons)
   m_TagString: Shop
   m_Icon: {fileID: 0}
@@ -3062,7 +3025,7 @@ PrefabInstance:
         type: 3}
       propertyPath: animator
       value: 
-      objectReference: {fileID: 311351897}
+      objectReference: {fileID: 0}
     - target: {fileID: 1443919708741246148, guid: 8950f5268d558b449b848f81f8a33641,
         type: 3}
       propertyPath: jump_A
@@ -3081,7 +3044,7 @@ PrefabInstance:
     - target: {fileID: 1443919708741246149, guid: 8950f5268d558b449b848f81f8a33641,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.602
+      value: -0.677
       objectReference: {fileID: 0}
     - target: {fileID: 1443919708741246149, guid: 8950f5268d558b449b848f81f8a33641,
         type: 3}
@@ -3233,12 +3196,12 @@ PrefabInstance:
         type: 3}
       propertyPath: attackPoint
       value: 
-      objectReference: {fileID: 992703210}
+      objectReference: {fileID: 0}
     - target: {fileID: 3473391028695673846, guid: 8950f5268d558b449b848f81f8a33641,
         type: 3}
       propertyPath: firePoint
       value: 
-      objectReference: {fileID: 968731671}
+      objectReference: {fileID: 0}
     - target: {fileID: 3473391028695673846, guid: 8950f5268d558b449b848f81f8a33641,
         type: 3}
       propertyPath: arrowPrefab
@@ -3249,11 +3212,21 @@ PrefabInstance:
         type: 3}
       propertyPath: weapon
       value: 
-      objectReference: {fileID: 11400000, guid: 595cc537cc64a934c887c950f294419c,
+      objectReference: {fileID: 11400000, guid: d89fb1cf680f9594aaa9063eb70616e9,
         type: 2}
     - target: {fileID: 3473391028695673846, guid: 8950f5268d558b449b848f81f8a33641,
         type: 3}
       propertyPath: straightArrows
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3473391028695673846, guid: 8950f5268d558b449b848f81f8a33641,
+        type: 3}
+      propertyPath: shootAnimationDuration
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3473391028695673846, guid: 8950f5268d558b449b848f81f8a33641,
+        type: 3}
+      propertyPath: attackDelay
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3473391029045571766, guid: 8950f5268d558b449b848f81f8a33641,
@@ -3280,7 +3253,32 @@ PrefabInstance:
         type: 3}
       propertyPath: playerAC
       value: 
-      objectReference: {fileID: 311351897}
+      objectReference: {fileID: 0}
+    - target: {fileID: 8951128311240304077, guid: 8950f5268d558b449b848f81f8a33641,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.67
+      objectReference: {fileID: 0}
+    - target: {fileID: 8951128311240304077, guid: 8950f5268d558b449b848f81f8a33641,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.58
+      objectReference: {fileID: 0}
+    - target: {fileID: 8951128311801735840, guid: 8950f5268d558b449b848f81f8a33641,
+        type: 3}
+      propertyPath: m_BackGroundColor.g
+      value: 0.6886792
+      objectReference: {fileID: 0}
+    - target: {fileID: 8951128311801735840, guid: 8950f5268d558b449b848f81f8a33641,
+        type: 3}
+      propertyPath: m_BackGroundColor.b
+      value: 0.64945805
+      objectReference: {fileID: 0}
+    - target: {fileID: 8951128311801735840, guid: 8950f5268d558b449b848f81f8a33641,
+        type: 3}
+      propertyPath: m_BackGroundColor.r
+      value: 0.13318795
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8950f5268d558b449b848f81f8a33641, type: 3}
 --- !u!1 &1523908768
@@ -3520,7 +3518,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1617745138}
   - component: {fileID: 1617745139}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ShopTrigger(Food)
   m_TagString: Shop
   m_Icon: {fileID: 0}

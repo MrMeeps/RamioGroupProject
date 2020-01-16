@@ -14,6 +14,8 @@ public class PlayerCollision : MonoBehaviour
     public bool nextLevel;
     public int level;
     public bool loadTown;
+    [Header("Camera Settings")]
+    [HideInInspector]public bool camZoom;
     [Header("Testing Only")]
     public bool LifeTesting;
     [HideInInspector] public bool InShop;
@@ -58,10 +60,13 @@ public class PlayerCollision : MonoBehaviour
     #region ON TRIGGER ENTER 2D FUNCTION
     void OnTriggerEnter2D(Collider2D collision)
     {
+        //Enemy Collision
         if (collision.gameObject.CompareTag("Enemy Arrow"))
             TakeDamage(collision.gameObject.GetComponent<ArrowScript>().attackDamage);
+        //Shop Collision
         if (collision.gameObject.CompareTag("Shop"))
             InShop = true;
+        //Level Load
         if (collision.gameObject.CompareTag("Town"))
         {
             loadTown = true;
@@ -69,6 +74,12 @@ public class PlayerCollision : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("NextLevel"))
             StartCoroutine(LoadLevel(collision));
+        //Camera Zoom
+        if (collision.gameObject.CompareTag("CameraZoom"))
+            camZoom = true;
+        //Death
+        if (collision.gameObject.CompareTag("Death"))
+            StartCoroutine(CameraDeath());
     }
     #endregion
     #region ON TRIGGER EXIT 2D FUNCTION
@@ -105,6 +116,19 @@ public class PlayerCollision : MonoBehaviour
         PlayerPrefs.SetInt("level", level);
         yield return new WaitForSeconds(2f);
         animator.SetTrigger("FadeOut");
+    }
+    #endregion
+    #region CAMERA DEATH FUNCTION
+    IEnumerator CameraDeath()
+    {
+        GetComponentInChildren<Camera>().transform.parent = null;
+        yield return new WaitForSeconds(1f);
+        PlayerPrefs.SetInt("lives", lives - 1);
+        lives = PlayerPrefs.GetInt("lives");
+        if (lives < 0)
+            SceneManager.LoadScene("Game Over");
+        else
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     #endregion
 }

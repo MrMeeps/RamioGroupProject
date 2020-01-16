@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 public class PlayerCombat : MonoBehaviour
 {
     #region VARIABLES
@@ -10,7 +12,6 @@ public class PlayerCombat : MonoBehaviour
     public float attackRange = 0.5f;
     public LayerMask enemyLayer;
     [Header("Ranged Attack Settings")]
-    public bool straightArrows;
     public Transform firePoint;
     public GameObject arrowPrefab;
     [Header("Delay Settings")]
@@ -18,22 +19,27 @@ public class PlayerCombat : MonoBehaviour
     public float attackTimer;
     [Header("Arrow Settings")]
     public float speed = 10f;
+    [Header("Animation Settings")]
+    Animator animator;
+    public float attackAnimationDuration;
+    public float shootAnimationDuration;
     #endregion
     //UNITY FUNCTIONS
     #region START FUNCTION
-    void Start()
-    {
-        if (gameObject.name == "Player" || gameObject.name == "player")
-            attackDamage = weapon.damage;
-    }
+    void Start(){animator = GetComponent<Animator>();}
     #endregion
     #region UPDATE FUNCTION
     void Update()
     {
         attackTimer += Time.deltaTime;
-        if (attackTimer > attackDelay)
-            if (Input.GetKeyDown(KeyCode.Mouse0))
-                Attack();
+        if (attackTimer > attackDelay && Input.GetKeyDown(KeyCode.Mouse0))
+                StartCoroutine(Attack());
+        if (SceneManager.GetActiveScene().name.StartsWith("L") && weapon.weaponType == Weapon.Weapons.sword)
+            animator.SetBool("Sword", true);
+        else
+            animator.SetBool("Sword", false);
+        attackDamage = weapon.damage;
+
     }
     #endregion
     #region ON DRAW GIZMO SELECTED FUNCTION
@@ -47,12 +53,13 @@ public class PlayerCombat : MonoBehaviour
     #endregion
     //COMBAT FUNCTIONS
     #region ATTACK FUNCTION
-    void Attack()
+    IEnumerator Attack()
     {
         //Melee Attack
         if (weapon.weaponType == Weapon.Weapons.sword)
         {
-            //Play attack animation
+            animator.SetTrigger("Attack");
+            yield return new WaitForSeconds(attackAnimationDuration);
             Collider2D[] enemiesHit = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayer);
             foreach (Collider2D enemy in enemiesHit)
                 enemy.GetComponent<EnemyHealth>().TakeDamage(attackDamage);
@@ -61,27 +68,23 @@ public class PlayerCombat : MonoBehaviour
         //Shoot
         if (weapon.weaponType == Weapon.Weapons.bow)
         {
+            animator.SetTrigger("Shoot");
+            yield return new WaitForSeconds(shootAnimationDuration);
             GameObject arrow = Instantiate(arrowPrefab, firePoint.position, firePoint.rotation);
-            switch (straightArrows)
+            Vector2 shootDir;
+            if(GetComponent<PlayerMovement>().facingRight)
+                shootDir = new Vector2(1, 0);
+            else
+                shootDir = new Vector2(-1, 0);
+            arrow.GetComponent<Rigidbody2D>().velocity = shootDir * speed;
+            if (GetComponent<PlayerMovement>().facingRight == false)
             {
-                case true:
-                    Vector2 shootDir;
-                    if(GetComponent<PlayerMovement>().facingRight)
-                        shootDir = new Vector2(1, 0);
-                    else
-                        shootDir = new Vector2(-1, 0);
-                    arrow.GetComponent<Rigidbody2D>().velocity = shootDir * speed;
-                    arrow.AddComponent<ArrowScript>().attackDamage = attackDamage;
-                    attackTimer = 0;
-                    break;
-                case false:
-                    Vector2 mousePosition = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
-                    Vector2 firePointPosition = new Vector2(firePoint.position.x, firePoint.position.y);
-                    arrow.GetComponent<Rigidbody2D>().velocity = (mousePosition - firePointPosition) * speed;
-                    arrow.AddComponent<ArrowScript>().attackDamage = attackDamage;
-                    attackTimer = 0;
-                    break;
+                arrow.AddComponent<ArrowScript>().flip = true;
+                arrow.GetComponent<ArrowScript>().attackDamage = attackDamage;
             }
+            else
+                arrow.AddComponent<ArrowScript>().attackDamage = attackDamage;
+            attackTimer = 0;
         }
     }
     #endregion

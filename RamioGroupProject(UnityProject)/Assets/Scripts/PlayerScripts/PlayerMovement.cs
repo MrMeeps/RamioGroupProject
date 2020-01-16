@@ -14,6 +14,8 @@ public class PlayerMovement : MonoBehaviour
     [Header("Animation Settings")]
     public Animator animator;
     public float jump_A_Duration;
+    [Header("Slow Mo Settings")]
+    public bool slowMoOn;
     [Header("Testing Only")]
     public bool cameraFollowTest;
     new Transform camera;
@@ -51,6 +53,9 @@ public class PlayerMovement : MonoBehaviour
             animator.SetFloat("x", velocity.x);
             animator.SetFloat("y", velocity.y);
         }
+        //Slow-Mo
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+            SlowMo();
         //Flipping character
         if (moveX > 0 && !facingRight)
             Flip();
@@ -96,6 +101,21 @@ public class PlayerMovement : MonoBehaviour
         Vector3 theScale = transform.localScale;
         theScale.x *= -1;
         transform.localScale = theScale;
+    }
+    #endregion
+    #region SLOW MO FUNCTION
+    void SlowMo()
+    {
+        if(slowMoOn == false)
+        {
+            Time.timeScale = 0.6f;
+            slowMoOn = true;
+        }
+        else
+        {
+            Time.timeScale = 1;
+            slowMoOn = false;
+        }
     }
     #endregion
 }

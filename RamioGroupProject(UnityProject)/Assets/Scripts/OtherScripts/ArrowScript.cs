@@ -4,8 +4,20 @@ public class ArrowScript : MonoBehaviour
     #region VARIABLES
     public int attackDamage;
     float timer = 0;
+    [HideInInspector] public bool flip;
     #endregion
     //UNITY FUNCTIONS
+    #region START FUNCTION
+    void Start()
+    {
+        if(flip == true)
+        {
+            Vector3 theScale = transform.localScale;
+            theScale.x *= -1;
+            transform.localScale = theScale;
+        }
+    }
+    #endregion
     #region UPDATE FUNCTION
     void Update()
     {
