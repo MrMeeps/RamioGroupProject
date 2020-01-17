@@ -62,6 +62,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\EnemyScripts\DarkEnemyAI.cs" />
     <Compile Include="Assets\Scripts\EnemyScripts\EnemyAI.cs" />
     <Compile Include="Assets\Scripts\EnemyScripts\EnemyHealth.cs" />
     <Compile Include="Assets\Scripts\OtherScripts\ArrowScript.cs" />

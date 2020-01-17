@@ -6,7 +6,6 @@ public class PlayerLevelTwoMechanic : MonoBehaviour
     #region VARIABLES
     public float lightOuterRadius;
     public float speed;
-    int prevCoins;
     bool killLoop = true;
     #endregion
     //UNITY FUNCTIONS
@@ -27,8 +26,7 @@ public class PlayerLevelTwoMechanic : MonoBehaviour
     #region LIGHT INCREASE FUNCTION
     public void LightIncrease()
     {
-        print("works");
-        lightOuterRadius = lightOuterRadius + .1f;
+        lightOuterRadius = lightOuterRadius + .2f;
         GetComponentInChildren<Light2D>().pointLightOuterRadius = lightOuterRadius;
     }
     #endregion

@@ -13,6 +13,7 @@ TagManager:
   - CameraZoom
   - Death
   - Coin
+  - SpawnEnemy
   layers:
   - Default
   - TransparentFX
@@ -27,7 +28,7 @@ TagManager:
   - Enemy
   - Enemy Arrows
   - Triggers
-  - 
+  - GooEnemy
   - 
   - 
   - 

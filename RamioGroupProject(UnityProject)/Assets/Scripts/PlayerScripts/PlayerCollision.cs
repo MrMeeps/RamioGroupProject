@@ -22,6 +22,8 @@ public class PlayerCollision : MonoBehaviour
     public bool loadTown;
     [Header("Camera Settings")]
     [HideInInspector]public bool camZoom;
+    [Header("Level Two Mechanic")]
+    public GameObject darkEnemy;
     [Header("Testing Only")]
     public bool LifeTesting;
     [HideInInspector] public bool InShop;
@@ -105,6 +107,12 @@ public class PlayerCollision : MonoBehaviour
             PlayerPrefs.SetInt("coins", coins);
             Destroy(collision.gameObject);
         }
+        //Spawn Enemy
+        if (collision.gameObject.CompareTag("SpawnEnemy"))
+            StartCoroutine(SpawnEnemy());
+        //Win
+        if (collision.gameObject.CompareTag("Win"))
+            SceneManager.LoadScene("Win");
     }
     #endregion
     #region ON TRIGGER EXIT 2D FUNCTION
@@ -155,6 +163,15 @@ public class PlayerCollision : MonoBehaviour
             SceneManager.LoadScene("Game Over");
         else
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+    #endregion
+    #region SPAWN ENEMY
+    IEnumerator SpawnEnemy()
+    {
+        Transform local = GetComponent<Transform>();
+        yield return new WaitForSeconds(0.1f);
+        GameObject enemy = Instantiate(darkEnemy, local);
+        enemy.GetComponent<Transform>().position = new Vector3(local.position.x - 2, local.position.y, -1);
     }
     #endregion
 }
