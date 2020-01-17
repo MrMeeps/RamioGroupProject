@@ -111,10 +111,10 @@ MonoBehaviour:
     y: 30
     width: 1920
     height: 947
-  m_MinSize: {x: 608, y: 492}
-  m_MaxSize: {x: 18003, y: 14042}
+  m_MinSize: {x: 609, y: 492}
+  m_MaxSize: {x: 18004, y: 14042}
   vertical: 1
-  controlID: 49
+  controlID: 149
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -137,10 +137,10 @@ MonoBehaviour:
     y: 0
     width: 1920
     height: 947
-  m_MinSize: {x: 608, y: 492}
-  m_MaxSize: {x: 18003, y: 14042}
+  m_MinSize: {x: 609, y: 492}
+  m_MaxSize: {x: 18004, y: 14042}
   vertical: 0
-  controlID: 50
+  controlID: 150
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -192,7 +192,7 @@ MonoBehaviour:
   m_MinSize: {x: 232, y: 492}
   m_MaxSize: {x: 10002, y: 14042}
   vertical: 1
-  controlID: 83
+  controlID: 52
 --- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -269,8 +269,8 @@ MonoBehaviour:
     y: 0
     width: 458
     height: 947
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 276, y: 71}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 21}
   m_Panes:
   - {fileID: 21}
@@ -402,9 +402,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -80.31669, y: 17.153685, z: -2.3363485}
+    m_Target: {x: -41.141624, y: 12.1167965, z: -6.84375}
     speed: 2
-    m_Value: {x: 583.5214, y: 567.9823, z: -1374.5}
+    m_Value: {x: -41.141624, y: 12.1167965, z: -6.84375}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -454,9 +454,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 42.497265
+    m_Target: 82.091705
     speed: 2
-    m_Value: 1399.1913
+    m_Value: 82.091705
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -510,9 +510,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
+      m_SelectedIDs: 6c430000
       m_LastClickedID: 0
-      m_ExpandedIDs: e847feff6048feffa049feffa449feffaa49feff904afefffc4afeff044bfeff7e4cfeff4456feffb056feffaa59feff92e5feffea1dffffd21effff0820ffff56e1ffffeceaffff70eeffffe6eeffffeaeeffffeceefffff8efffff78f1ffff66f2ffffa8f5ffff42fbffffa0580000ea5800001a590000faa700009ca80000
+      m_ExpandedIDs: 7cf9ffff44fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -629,7 +629,7 @@ MonoBehaviour:
   m_Position:
     m_Target: {x: -11.871367, y: 2.2933407, z: -543.89795}
     speed: 2
-    m_Value: {x: 960, y: 540, z: 0}
+    m_Value: {x: -11.871367, y: 2.2933407, z: -543.89795}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -681,7 +681,7 @@ MonoBehaviour:
   m_Size:
     m_Target: 16.246817
     speed: 2
-    m_Value: 3634.797
+    m_Value: 16.246817
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -745,20 +745,20 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Visuals/UI
+    - Assets/Scenes/Levels
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Visuals/UI
+  - Assets/Scenes/Levels
   m_LastFoldersGridSize: 16
   m_LastProjectPath: D:\2019\PM\~JMB\Repositories\RamioGroupProject\RamioGroupProject(UnityProject)
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 6e480000
-    m_LastClickedID: 18542
-    m_ExpandedIDs: 00000000f03b00002441000026410000284100002a4100002c4100002e410000304100009441000000ca9a3b
+    m_SelectedIDs: ae3f0000
+    m_LastClickedID: 16302
+    m_ExpandedIDs: 00000000f43b0000a23f0000a43f0000a63f0000a83f0000aa3f0000ac3f0000ae3f0000f83f000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -786,21 +786,21 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 240}
     m_SelectedIDs: 82380100
     m_LastClickedID: 0
-    m_ExpandedIDs: ffffffff00000000f03b00002441000026410000284100002a4100002c4100002e41000030410000804100009041000094410000b8410000a25b0000a65b0000aa5b0000
+    m_ExpandedIDs: 00000000f43b0000a23f0000a43f0000a63f0000a83f0000aa3f0000ac3f0000ae3f0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: PlayerHUD
-      m_OriginalName: PlayerHUD
+      m_Name: 
+      m_OriginalName: 
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 15958
+      m_UserData: 0
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 0
+      m_OriginalEventType: 11
       m_IsRenamingFilename: 1
       m_ClientGUIView: {fileID: 10}
     m_SearchString: 
