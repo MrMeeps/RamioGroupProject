@@ -23,7 +23,6 @@ public class ShoppingMenu : MonoBehaviour
             case MenuType.Armor:
                 break;
         }
-
     }
     #endregion
 }
