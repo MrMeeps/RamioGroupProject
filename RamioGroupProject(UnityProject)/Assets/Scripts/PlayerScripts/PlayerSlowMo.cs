@@ -13,7 +13,7 @@ public class PlayerSlowMo : MonoBehaviour
   #region START FUNCTION
   void Start()
   {
-      slowMoTime = slowMoMaxTime = 8f;
+      slowMoTime = slowMoMaxTime;
       slowMoSlider.maxValue = slowMoMaxTime;
       slowMoSlider.value = slowMoTime;
   }

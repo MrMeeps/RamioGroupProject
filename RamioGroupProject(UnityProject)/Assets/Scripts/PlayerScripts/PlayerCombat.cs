@@ -39,9 +39,9 @@ public class PlayerCombat : MonoBehaviour
         else
             animator.SetBool("Sword", false);
         attackDamage = weapon.damage;
-        if (Input.GetKeyDown(KeyCode.Keypad2))
+        if (Input.GetKeyDown(KeyCode.Alpha2))
             weapon.weaponType = weapon.weaponType = Weapon.Weapons.bow;
-        else if (Input.GetKeyDown(KeyCode.Keypad1))
+        else if (Input.GetKeyDown(KeyCode.Alpha1))
             weapon.weaponType = weapon.weaponType = Weapon.Weapons.sword;
     }
     #endregion

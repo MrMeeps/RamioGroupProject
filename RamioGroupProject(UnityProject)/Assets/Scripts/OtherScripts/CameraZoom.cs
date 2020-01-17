@@ -12,8 +12,10 @@ public class CameraZoom : MonoBehaviour
     #region START FUNCTION
     void Start()
     {
-        if (SceneManager.GetActiveScene().name != "Level Two")
+        if (SceneManager.GetActiveScene().name != "Level 2")
             normal = 1.6f;
+        if (SceneManager.GetActiveScene().name == "Level 2")
+            slowMoZoom = 4.4f;
     }
     #endregion
     #region UPDATE FUNCTION

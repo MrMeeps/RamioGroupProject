@@ -25,6 +25,7 @@ public class PlayerCollision : MonoBehaviour
     [Header("Testing Only")]
     public bool LifeTesting;
     [HideInInspector] public bool InShop;
+    [HideInInspector] public bool coinChange;
     #endregion
     //UNITY FUNCTIONS
     #region START FUNCTION
@@ -87,13 +88,18 @@ public class PlayerCollision : MonoBehaviour
             StartCoroutine(LoadLevel(collision));
         //Camera Zoom
         if (collision.gameObject.CompareTag("CameraZoom"))
+        {
             camZoom = true;
+            GetComponentInChildren<CameraZoom>().slowMoZoom = 2;
+        }
         //Death
         if (collision.gameObject.CompareTag("Death"))
             StartCoroutine(CameraDeath());
         //Coin Collecting
         if(collision.gameObject.CompareTag("Coin"))
         {
+            if (SceneManager.GetActiveScene().name == "Level 2")
+                GetComponent<PlayerLevelTwoMechanic>().LightIncrease();
             coins++;
             coinText.text = "" + coins;
             PlayerPrefs.SetInt("coins", coins);

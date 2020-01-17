@@ -60,7 +60,7 @@ public class UIScript : MonoBehaviour
     public void StartGame()
     {
         PlayerPrefs.SetInt("lives", 3);
-        PlayerPrefs.SetInt("level", 1);
+        PlayerPrefs.SetInt("level", 0);
         PlayerPrefs.SetInt("coins", 0);
         animator.SetTrigger("FadeOut");
     }
@@ -96,12 +96,14 @@ public class UIScript : MonoBehaviour
     #endregion
     #region ON FADE COMPLETE FUNCTION
     public void OnFadeComplete() 
-    { 
-        if(UI == UIOptions.MainMenu)
-            SceneManager.LoadScene("Town");
+    {
+        if (UI == UIOptions.MainMenu)
+            SceneManager.LoadScene("Tutorial");
         else if (UI == UIOptions.Fade && player.GetComponent<PlayerCollision>().loadTown == false)
             SceneManager.LoadScene("Level " + player.GetComponent<PlayerCollision>().level);
         else if (UI == UIOptions.Fade && player.GetComponent<PlayerCollision>().loadTown == true)
+            SceneManager.LoadScene("Town");
+        else if (SceneManager.GetActiveScene().name == "Tutorial")
             SceneManager.LoadScene("Town");
     }
     #endregion

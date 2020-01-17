@@ -6,11 +6,11 @@ public class PlayerTutorial : MonoBehaviour
     [Header("Text Settings")]
     public Text[] tips = new Text[4];
     int arrayNum = 5;
-    float timer;
-    public bool timeStart;
+    public float timer;
     [Header("UI Elements")]
-    GameObject playerLoadOut;
-    GameObject slowMoSlider;
+    public GameObject playerLoadOut;
+    public GameObject slowMoSlider;
+    bool startTime;
     #endregion
     //UNITY FUNCTION
     #region START FUNCTION
@@ -29,12 +29,14 @@ public class PlayerTutorial : MonoBehaviour
         {
             case 0:
                 tips[arrayNum].gameObject.SetActive(true);
-                if(Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow))
+                if(Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow) || startTime == true)
                 {
+                    startTime = true;
                     timer += Time.deltaTime;
                     if(timer > 1f)
-                    {   
+                    {
                         arrayNum = 5;
+                        startTime = false;
                         timer = 0;
                     }
                 }
@@ -42,23 +44,18 @@ public class PlayerTutorial : MonoBehaviour
             case 1:
                 tips[arrayNum].gameObject.SetActive(true);
                 if(Input.GetKeyDown(KeyCode.Space))
-                {
-                    timer += Time.deltaTime;
-                    if(timer > 1f)
-                    {
-                        arrayNum = 5;
-                        timer = 0;
-                    }
-                }
+                    arrayNum = 5;
                 break;
             case 2:
                 tips[arrayNum].gameObject.SetActive(true);
-                if(Input.GetKeyDown(KeyCode.Mouse0))
+                if(Input.GetKeyDown(KeyCode.Mouse0) || startTime == true)
                 {
+                    startTime = true;
                     timer += Time.deltaTime;
                     if(timer > 1f)
                     {
                         arrayNum = 5;
+                        startTime = false;
                         timer = 0;
                     }
                 }
@@ -66,12 +63,14 @@ public class PlayerTutorial : MonoBehaviour
             case 3:
                 tips[arrayNum].gameObject.SetActive(true);
                 playerLoadOut.SetActive(true);
-                if(Input.GetKeyDown(KeyCode.Keypad2))
+                if(Input.GetKeyDown(KeyCode.Alpha2) || startTime == true)
                 {
+                    startTime = true;
                     timer += Time.deltaTime;
                     if(timer > 1f)
                     {
                         arrayNum = 5;
+                        startTime = false;
                         timer = 0;
                     }
                 }
@@ -79,12 +78,14 @@ public class PlayerTutorial : MonoBehaviour
             case 4:
                 tips[arrayNum].gameObject.SetActive(true);
                 slowMoSlider.SetActive(true);
-                if(Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
+                if(Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift) || startTime == true)
                 {
+                    startTime = true;
                     timer += Time.deltaTime;
                     if(timer > 1f)
                     {
                         arrayNum = 5;
+                        startTime = false;
                         timer = 0;
                     }
                 }
