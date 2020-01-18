@@ -1,6 +1,8 @@
+#region NAMESPACES
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
+#endregion
 public class PlayerLight : MonoBehaviour
 {
     #region VARIABLES

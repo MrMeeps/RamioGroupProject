@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿#region NAMESPACES
+using UnityEngine;
+#endregion
 public class Parallax : MonoBehaviour
 {
     #region VARIABLES

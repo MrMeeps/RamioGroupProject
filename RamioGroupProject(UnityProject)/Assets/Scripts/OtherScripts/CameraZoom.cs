@@ -1,5 +1,7 @@
-﻿using UnityEngine;
+﻿#region NAMESPACES
+using UnityEngine;
 using UnityEngine.SceneManagement;
+#endregion
 public class CameraZoom : MonoBehaviour
 {
     #region VARIABLES

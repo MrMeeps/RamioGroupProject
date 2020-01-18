@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿#region NAMESPACES
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+#endregion
 public class PlayerCombat : MonoBehaviour
 {
     #region VARIABLES

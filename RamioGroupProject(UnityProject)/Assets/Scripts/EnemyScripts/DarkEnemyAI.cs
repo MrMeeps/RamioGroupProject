@@ -1,5 +1,7 @@
-﻿using UnityEngine;
+﻿#region NAMESPACES
+using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
+#endregion
 public class DarkEnemyAI : MonoBehaviour
 {
     #region VARIABLES

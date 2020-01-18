@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿#region NAMESPACES
+using UnityEngine;
+#endregion
 [CreateAssetMenu(fileName = "New Weapon", menuName = "Weapon")]
 public class Weapon : ScriptableObject
 {

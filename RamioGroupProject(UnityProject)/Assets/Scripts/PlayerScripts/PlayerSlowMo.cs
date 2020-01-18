@@ -1,5 +1,7 @@
+#region NAMESPACES
 using UnityEngine;
 using UnityEngine.UI;
+#endregion
 public class PlayerSlowMo : MonoBehaviour
 {
   #region VARIABLES

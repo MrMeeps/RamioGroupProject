@@ -1,5 +1,7 @@
+#region NAMESPACES
 using System.Collections;
 using UnityEngine;
+#endregion
 public class PlayerMovement : MonoBehaviour
 {
     #region VARIABLES

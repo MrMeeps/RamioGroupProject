@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿#region NAMESPACES
+using UnityEngine;
+#endregion
 public class EnemyHealth : MonoBehaviour
 {
     #region VARIABLES
@@ -22,12 +24,8 @@ public class EnemyHealth : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-        //Play damage animation
         if (currentHealth <= 0)
-        {
-            //Play death animation
             Destroy(gameObject);
-        }
     }
     #endregion
 }

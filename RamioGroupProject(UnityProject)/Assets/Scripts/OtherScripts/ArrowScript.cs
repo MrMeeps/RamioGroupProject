@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿#region NAMESPACES
+using UnityEngine;
+#endregion
 public class ArrowScript : MonoBehaviour
 {
     #region VARIABLES
@@ -26,7 +28,7 @@ public class ArrowScript : MonoBehaviour
             Destroy(gameObject);
     }
     #endregion
-    #region ON TRIGGER ENTER 2D FUNCTION
-    void OnTriggerEnter2D(Collider2D collision) { Destroy(gameObject); }
+    #region ON COLLISION ENTER 2D FUNCTION
+    void OnCollisionEnter2D(Collision2D collision) { Destroy(gameObject); }
     #endregion
 }

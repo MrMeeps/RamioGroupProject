@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿#region NAMESPACES
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+#endregion
 public class PlayerCollision : MonoBehaviour
 {
     #region VARIABLES
@@ -19,7 +21,6 @@ public class PlayerCollision : MonoBehaviour
     public Animator playerAC;
     public bool nextLevel;
     public int level;
-    public bool loadTown;
     [Header("Camera Settings")]
     [HideInInspector]public bool camZoom;
     [Header("Level Two Mechanic")]
@@ -27,7 +28,6 @@ public class PlayerCollision : MonoBehaviour
     public bool turnAway;
     [Header("Testing Only")]
     public bool LifeTesting;
-    [HideInInspector] public bool InShop;
     [HideInInspector] public bool coinChange;
     #endregion
     //UNITY FUNCTIONS
@@ -75,55 +75,44 @@ public class PlayerCollision : MonoBehaviour
     #region ON TRIGGER ENTER 2D FUNCTION
     void OnTriggerEnter2D(Collider2D collision)
     {
-        //Enemy Collision
-        if (collision.gameObject.CompareTag("Enemy Arrow"))
-            TakeDamage(collision.gameObject.GetComponent<ArrowScript>().attackDamage);
-        //Shop Collision
-        if (collision.gameObject.CompareTag("Shop"))
-            InShop = true;
-        //Level Load
-        if (collision.gameObject.CompareTag("Town"))
+        switch (collision.gameObject.tag)
         {
-            loadTown = true;
-            animator.SetTrigger("FadeOut");
+            case "Enemy Arrow":
+                TakeDamage(collision.gameObject.GetComponent<ArrowScript>().attackDamage);
+                break;
+            case "NextLevel":
+                StartCoroutine(LoadLevel(collision));
+                break;
+            case "CameraZoom":
+                camZoom = true;
+                GetComponentInChildren<CameraZoom>().slowMoZoom = 2;
+                break;
+            case "Death":
+                StartCoroutine(CameraDeath());
+                break;
+            case "Coin":
+                if (SceneManager.GetActiveScene().name == "Level 2")
+                    GetComponent<PlayerLight>().LightIncrease();
+                coins++;
+                coinText.text = "" + coins;
+                PlayerPrefs.SetInt("coins", coins);
+                Destroy(collision.gameObject);
+                break;
+            case "SpawnEnemy":
+                StartCoroutine(SpawnEnemy(collision));
+                break;
+            case "TurnAway":
+                turnAway = true;
+                break;
+            case "Win":
+                SceneManager.LoadScene("Win");
+                break;
+            case "Untagged":
+                break;
+            default:
+                Debug.LogWarning("Tag may not exist in current context");
+                break;
         }
-        else if (collision.gameObject.CompareTag("NextLevel"))
-            StartCoroutine(LoadLevel(collision));
-        //Camera Zoom
-        if (collision.gameObject.CompareTag("CameraZoom"))
-        {
-            camZoom = true;
-            GetComponentInChildren<CameraZoom>().slowMoZoom = 2;
-        }
-        //Death
-        if (collision.gameObject.CompareTag("Death"))
-            StartCoroutine(CameraDeath());
-        //Coin Collecting
-        if(collision.gameObject.CompareTag("Coin"))
-        {
-            if (SceneManager.GetActiveScene().name == "Level 2")
-                GetComponent<PlayerLight>().LightIncrease();
-            coins++;
-            coinText.text = "" + coins;
-            PlayerPrefs.SetInt("coins", coins);
-            Destroy(collision.gameObject);
-        }
-        //Spawn Enemy
-        if (collision.gameObject.CompareTag("SpawnEnemy"))
-            StartCoroutine(SpawnEnemy(collision));
-        //Turn Away
-        if (collision.gameObject.CompareTag("TurnAway"))
-            turnAway = true; 
-        //Win
-        if (collision.gameObject.CompareTag("Win"))
-            SceneManager.LoadScene("Win");
-    }
-    #endregion
-    #region ON TRIGGER EXIT 2D FUNCTION
-    void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Shop"))
-            InShop = false;
     }
     #endregion
     //PLAYER HEALTH FUNCTIONS
@@ -143,7 +132,7 @@ public class PlayerCollision : MonoBehaviour
         }
     }
     #endregion
-    #region LOAD LEVEL
+    #region LOAD LEVEL FUNCTION
     IEnumerator LoadLevel(Collider2D trigger)
     {
         GameObject disableTrigger = trigger.gameObject;
@@ -169,7 +158,7 @@ public class PlayerCollision : MonoBehaviour
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     #endregion
-    #region SPAWN ENEMY
+    #region SPAWN ENEMY FUNCTION
     IEnumerator SpawnEnemy(Collider2D collision)
     {
         collision.gameObject.SetActive(false);

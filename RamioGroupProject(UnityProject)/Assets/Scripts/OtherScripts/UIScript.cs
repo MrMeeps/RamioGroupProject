@@ -1,5 +1,7 @@
-﻿using UnityEngine;
+﻿#region NAMESPACES
+using UnityEngine;
 using UnityEngine.SceneManagement;
+#endregion
 public enum UIOptions { MainMenu, PauseMenu, Fade, Shop, ShopPrompt }
 public class UIScript : MonoBehaviour
 {
@@ -41,17 +43,6 @@ public class UIScript : MonoBehaviour
             GetComponent<Canvas>().enabled = false;
             Time.timeScale = 1;
             pauseOn = false;
-        }
-        //Shop Prompt
-        if (UI == UIOptions.ShopPrompt && player.GetComponent<PlayerCollision>().InShop == true)
-        {
-            animator.SetBool("InShopTrigger", true);
-            GetComponentInParent<Canvas>().enabled = true;
-        }
-        else if (UI == UIOptions.ShopPrompt)
-        {
-            animator.SetBool("InShopTrigger", false);
-            GetComponentInParent<Canvas>().enabled = false;
         }
     }
     #endregion
@@ -99,12 +90,8 @@ public class UIScript : MonoBehaviour
     {
         if (UI == UIOptions.MainMenu)
             SceneManager.LoadScene("Tutorial");
-        else if (UI == UIOptions.Fade && player.GetComponent<PlayerCollision>().loadTown == false)
+        else if (UI == UIOptions.Fade)
             SceneManager.LoadScene("Level " + player.GetComponent<PlayerCollision>().level);
-        else if (UI == UIOptions.Fade && player.GetComponent<PlayerCollision>().loadTown == true)
-            SceneManager.LoadScene("Town");
-        else if (SceneManager.GetActiveScene().name == "Tutorial")
-            SceneManager.LoadScene("Town");
     }
     #endregion
 }
