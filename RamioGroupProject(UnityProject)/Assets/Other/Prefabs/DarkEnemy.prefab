@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7485556863304961434}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.123, y: -0.166, z: 0}
+  m_LocalPosition: {x: -0.111, y: -0.083, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7485556863504073312}
@@ -59,7 +59,7 @@ MonoBehaviour:
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
-  m_PointLightOuterRadius: 1
+  m_PointLightOuterRadius: 0
   m_PointLightDistance: 3
   m_PointLightQuality: 1
   m_ShapeLightParametricSides: 5
@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 7438300485045072083}
   m_Layer: 13
   m_Name: DarkEnemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -151,7 +151,7 @@ SpriteRenderer:
   m_Sprite: {fileID: -2042408749722656843, guid: 9a3ec00de75fa8b4ebfc9e5d283034b0,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1.2, y: 1.2}
@@ -207,9 +207,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  speed: 2.5
+  speed: 2.95
   moveX: 0
   facingLeft: 1
+  moveDir: {x: 0, y: 0}
   lightOuterRadius: 0
 --- !u!70 &7485556863504073315
 CapsuleCollider2D:

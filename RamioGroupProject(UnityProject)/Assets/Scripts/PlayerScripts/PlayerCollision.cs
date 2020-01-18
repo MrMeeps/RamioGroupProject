@@ -24,6 +24,7 @@ public class PlayerCollision : MonoBehaviour
     [HideInInspector]public bool camZoom;
     [Header("Level Two Mechanic")]
     public GameObject darkEnemy;
+    public bool turnAway;
     [Header("Testing Only")]
     public bool LifeTesting;
     [HideInInspector] public bool InShop;
@@ -39,7 +40,7 @@ public class PlayerCollision : MonoBehaviour
         coins = PlayerPrefs.GetInt("coins");
         healthSlider.maxValue = maxHealth;
         healthSlider.value = currentHealth;
-        livesText.text = "Lives: " + lives;
+        livesText.text = "x" + lives;
         coinText.text = "" + coins;
     }
     #endregion
@@ -101,7 +102,7 @@ public class PlayerCollision : MonoBehaviour
         if(collision.gameObject.CompareTag("Coin"))
         {
             if (SceneManager.GetActiveScene().name == "Level 2")
-                GetComponent<PlayerLevelTwoMechanic>().LightIncrease();
+                GetComponent<PlayerLight>().LightIncrease();
             coins++;
             coinText.text = "" + coins;
             PlayerPrefs.SetInt("coins", coins);
@@ -109,7 +110,10 @@ public class PlayerCollision : MonoBehaviour
         }
         //Spawn Enemy
         if (collision.gameObject.CompareTag("SpawnEnemy"))
-            StartCoroutine(SpawnEnemy());
+            StartCoroutine(SpawnEnemy(collision));
+        //Turn Away
+        if (collision.gameObject.CompareTag("TurnAway"))
+            turnAway = true; 
         //Win
         if (collision.gameObject.CompareTag("Win"))
             SceneManager.LoadScene("Win");
@@ -166,8 +170,9 @@ public class PlayerCollision : MonoBehaviour
     }
     #endregion
     #region SPAWN ENEMY
-    IEnumerator SpawnEnemy()
+    IEnumerator SpawnEnemy(Collider2D collision)
     {
+        collision.gameObject.SetActive(false);
         Transform local = GetComponent<Transform>();
         yield return new WaitForSeconds(0.1f);
         GameObject enemy = Instantiate(darkEnemy, local);

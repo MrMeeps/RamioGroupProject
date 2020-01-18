@@ -168,7 +168,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 8951128311240304086}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 7f0c1a6706b526c4d8dcdf270ef7678a, type: 2}
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -250,15 +250,21 @@ MonoBehaviour:
   maxHealth: 5
   currentHealth: 0
   lives: 0
+  healthSlider: {fileID: 0}
+  livesText: {fileID: 0}
   coins: 0
+  coinText: {fileID: 0}
   animator: {fileID: 0}
   playerAC: {fileID: 8951128311240304085}
   nextLevel: 0
   level: 0
   loadTown: 0
   camZoom: 0
+  darkEnemy: {fileID: 0}
+  turnAway: 0
   LifeTesting: 0
   InShop: 0
+  coinChange: 0
 --- !u!95 &8951128311240304085
 Animator:
   serializedVersion: 3
@@ -406,4 +412,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   zoomed: 1.6
   normal: 4
+  slowMoZoom: 2
   smooth: 5

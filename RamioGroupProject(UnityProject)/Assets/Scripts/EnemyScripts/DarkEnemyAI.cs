@@ -3,11 +3,12 @@ using UnityEngine.Experimental.Rendering.Universal;
 public class DarkEnemyAI : MonoBehaviour
 {
     #region VARIABLES
-    [Header("Chase Settings")]
+    [Header("Movement Settings")]
     public Transform player;
     public float speed = .1f;
     public float moveX;
     public bool facingLeft = true;
+    public Vector2 moveDir;
     [Header("Lighting Settings")]
     public float lightOuterRadius;
     bool lightStart = true;
@@ -23,10 +24,14 @@ public class DarkEnemyAI : MonoBehaviour
     #region UPDATE FUNCTION
     void Update()
     {
-        float moveXLocal = GetComponent<Transform>().position.x;
-        transform.position = Vector2.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
-        float moveXAfter = GetComponent<Transform>().position.x;
-        moveX = moveXLocal - moveXAfter;
+        if(GameObject.Find("Player").GetComponent<PlayerCollision>().turnAway == true)
+            moveDir = new Vector2(-1, 0);
+        else if (player.transform.position.x - gameObject.transform.position.x > 0)
+            moveDir = new Vector2(1, 0);
+        else
+            moveDir = new Vector2(-1, 0);
+        GetComponent<Rigidbody2D>().velocity = moveDir * speed;
+        moveX = GetComponent<Rigidbody2D>().velocity.x;
         if (moveX > 0 && !facingLeft)
             Flip();
         else if (moveX < 0 && facingLeft)
@@ -37,6 +42,13 @@ public class DarkEnemyAI : MonoBehaviour
             lightOuterRadius += .01f;
             if (GetComponentInChildren<Light2D>().pointLightOuterRadius >= 1)
                 lightStart = false;
+        }
+        else
+        {
+            GetComponentInChildren<Light2D>().pointLightOuterRadius = lightOuterRadius;
+            lightOuterRadius -= .01f;
+            if(GetComponentInChildren<Light2D>().pointLightOuterRadius <= 0)
+                lightOuterRadius += .01f;
         }
     }
     #endregion
