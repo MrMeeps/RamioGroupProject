@@ -12,7 +12,8 @@ public class PlayerMovement : MonoBehaviour
     public float fallMultiplier = 2.5f;
     public float lowJumpMultiplier = 2.5f;
     [HideInInspector] public bool facingRight = true;
-    public bool grounded = false;
+    public bool grounded;
+    public bool yIsNotZero;
     [Header("Animation Settings")]
     public Animator animator;
     public float jump_A_Duration;
@@ -59,6 +60,10 @@ public class PlayerMovement : MonoBehaviour
             GetComponent<Rigidbody2D>().velocity = velocity;
             animator.SetFloat("x", velocity.x);
             animator.SetFloat("y", velocity.y);
+            if (velocity.y < 1 || velocity.y > 1)
+                yIsNotZero = true;
+            else
+                yIsNotZero = false;
         }
         //Flipping character
         if (moveX > 0 && !facingRight && movementOn)
@@ -73,14 +78,14 @@ public class PlayerMovement : MonoBehaviour
     #region ON TRIGGER ENTER 2D FUNCTION
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == 0)
+        if(yIsNotZero == false && collision.gameObject.layer == 0)
             grounded = true;
     }
     #endregion
     #region ON TRIGGER STAY 2D FUNCTION
     void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == 0)
+        if (yIsNotZero == false && collision.gameObject.layer == 0)
             grounded = true;
     }
     #endregion
