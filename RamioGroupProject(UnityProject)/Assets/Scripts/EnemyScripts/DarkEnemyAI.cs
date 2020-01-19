@@ -21,6 +21,8 @@ public class DarkEnemyAI : MonoBehaviour
     {
         player = GameObject.Find("Player").GetComponent<Transform>();
         transform.parent = null;
+        if (player.gameObject.GetComponent<PlayerMovement>().doggo == true)
+            speed = 3.75f;
     }
     #endregion
     #region UPDATE FUNCTION

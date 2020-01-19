@@ -63,14 +63,28 @@ public class PlayerCollision : MonoBehaviour
             GetComponent<Rigidbody2D>().velocity = velocity;
             playerAC.SetFloat("x", velocity.x);
             playerAC.SetFloat("y", velocity.y);
+            if(GetComponent<PlayerMovement>().doggo == true)
+                GetComponent<PlayerMovement>().doggoAnim.SetFloat("x", velocity.x);
         }
     }
     #endregion
     #region ON COLLISION ENTER 2D FUNCTION
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Enemy"))
-            TakeDamage(1);
+        switch (collision.gameObject.tag)
+        {
+            case "Enemy":
+                TakeDamage(1);
+                break;
+            case "Smashed":
+                TakeDamage(999);
+                break;
+            case "Untagged":
+                break;
+            default:
+                Debug.LogWarning("Tag may not exist in current context");
+                break;
+        }
     }
     #endregion
     #region ON TRIGGER ENTER 2D FUNCTION
@@ -118,6 +132,9 @@ public class PlayerCollision : MonoBehaviour
             case "BossStart":
                 bossStart = true;
                 break;
+            case "Enemy":
+                TakeDamage(1);
+                break;
             case "Untagged":
                 break;
             default:
@@ -126,6 +143,7 @@ public class PlayerCollision : MonoBehaviour
         }
     }
     #endregion
+    
     //PLAYER HEALTH FUNCTIONS
     #region TAKE DAMAGE FUNCTION
     public void TakeDamage(int damage)

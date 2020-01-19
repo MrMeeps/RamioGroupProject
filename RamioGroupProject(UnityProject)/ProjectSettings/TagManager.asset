@@ -18,6 +18,8 @@ TagManager:
   - TurnAway
   - BossStart
   - ArrowPickUp
+  - CeilFall
+  - Smashed
   layers:
   - Default
   - TransparentFX

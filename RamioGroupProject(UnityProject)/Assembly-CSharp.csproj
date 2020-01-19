@@ -68,6 +68,7 @@
     <Compile Include="Assets\Scripts\EnemyScripts\ToadEnemyAI.cs" />
     <Compile Include="Assets\Scripts\OtherScripts\ArrowScript.cs" />
     <Compile Include="Assets\Scripts\OtherScripts\CameraZoom.cs" />
+    <Compile Include="Assets\Scripts\OtherScripts\LevelThreeMechanic.cs" />
     <Compile Include="Assets\Scripts\OtherScripts\Parallax.cs" />
     <Compile Include="Assets\Scripts\OtherScripts\UIScript.cs" />
     <Compile Include="Assets\Scripts\OtherScripts\Weapon.cs" />

@@ -18,6 +18,9 @@ public class PlayerMovement : MonoBehaviour
     public float jump_A_Duration;
     [Header("Slow Mo Settings")]
     public bool slowMoOn;
+    [Header("Level 3")]
+    public bool doggo = false;
+    public Animator doggoAnim;
     [Header("Testing Only")]
     public bool cameraFollowTest;
     new Transform camera;
@@ -51,6 +54,7 @@ public class PlayerMovement : MonoBehaviour
             GetComponent<Rigidbody2D>().velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
         //Movement
         animator.SetBool("grounded", grounded);
+        doggoAnim.SetBool("grounded", grounded);
         float moveX = Input.GetAxis("Horizontal");
         if (movementOn == true)
         {
@@ -59,6 +63,8 @@ public class PlayerMovement : MonoBehaviour
             GetComponent<Rigidbody2D>().velocity = velocity;
             animator.SetFloat("x", velocity.x);
             animator.SetFloat("y", velocity.y);
+            if(doggo == true)
+                doggoAnim.SetFloat("x", velocity.x);
         }
         //Flipping character
         if (moveX > 0 && !facingRight && movementOn)
@@ -119,6 +125,9 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(2f);
         movementOn = true;
         onStart = false;
+        GameObject dog = GameObject.Find("Player/Doggo");
+        dog.GetComponent<Collider2D>().isTrigger = false;
+        dog.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
     }
     #endregion
 }
