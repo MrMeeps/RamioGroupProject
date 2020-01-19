@@ -16,6 +16,8 @@ TagManager:
   - SpawnEnemy
   - Win
   - TurnAway
+  - BossStart
+  - ArrowPickUp
   layers:
   - Default
   - TransparentFX

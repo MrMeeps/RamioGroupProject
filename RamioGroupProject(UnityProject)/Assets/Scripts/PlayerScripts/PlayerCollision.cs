@@ -29,6 +29,7 @@ public class PlayerCollision : MonoBehaviour
     [Header("Testing Only")]
     public bool LifeTesting;
     [HideInInspector] public bool coinChange;
+    [HideInInspector] public bool bossStart;
     #endregion
     //UNITY FUNCTIONS
     #region START FUNCTION
@@ -99,6 +100,7 @@ public class PlayerCollision : MonoBehaviour
                 Destroy(collision.gameObject);
                 break;
             case "SpawnEnemy":
+                collision.GetComponent<Collider2D>().enabled = false;
                 StartCoroutine(SpawnEnemy(collision));
                 break;
             case "TurnAway":
@@ -106,6 +108,15 @@ public class PlayerCollision : MonoBehaviour
                 break;
             case "Win":
                 SceneManager.LoadScene("Win");
+                break;
+            case "ArrowPickUp":
+                collision.GetComponent<Collider2D>().enabled = false;
+                GetComponent<PlayerCombat>().arrowsLeft =  GetComponent<PlayerCombat>().arrowsLeft + 5;
+                GetComponent<PlayerCombat>().arrowsLeftText.text = "x" + GetComponent<PlayerCombat>().arrowsLeft;
+                Destroy(collision.gameObject);
+                break;
+            case "BossStart":
+                bossStart = true;
                 break;
             case "Untagged":
                 break;
@@ -161,7 +172,6 @@ public class PlayerCollision : MonoBehaviour
     #region SPAWN ENEMY FUNCTION
     IEnumerator SpawnEnemy(Collider2D collision)
     {
-        collision.gameObject.SetActive(false);
         Transform local = GetComponent<Transform>();
         yield return new WaitForSeconds(0.1f);
         GameObject enemy = Instantiate(darkEnemy, local);

@@ -1,6 +1,7 @@
 ﻿#region NAMESPACES
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 #endregion
 public class ToadEnemyAI : MonoBehaviour
 {
@@ -24,13 +25,17 @@ public class ToadEnemyAI : MonoBehaviour
     public int paceDuration;
     float moveTimer = 0;
     GameObject player;
-    Vector2 playerDistance;
+    public Vector2 playerDistance;
     bool left;
     bool chase;
     [Header("Animation Settings")]
     public Animator animator;
     public float attackAnimationDuration_A;
     public float attackAnimationDuration_B;
+    [Header("Boss Settings")]
+    public Canvas canvas;
+    public Slider slider;
+    public float test;
     #endregion
     //UNITY FUNCTIONS
     #region START FUNCTION
@@ -38,23 +43,39 @@ public class ToadEnemyAI : MonoBehaviour
     {
         player = GameObject.Find("Player");
         attackDamage = weapon.damage;
+        canvas = GameObject.Find("UI/EnemyCanvas").GetComponent<Canvas>();
+        canvas.enabled = false;
+        slider = canvas.GetComponentInChildren<Slider>();
     }
     #endregion
     #region UPDATE FUNCTION
     void Update()
     {
+        test = playerDistance.magnitude;
+        animator.SetFloat("PlayerMag", test);
         attackTimer += Time.deltaTime;
         playerDistance = new Vector2(player.transform.position.x - transform.position.x, player.transform.position.y - transform.position.y);
-        if (playerDistance.magnitude < hitRange && attackTimer > attackDelay)
-            StartCoroutine(Attack());
+        if (playerDistance.magnitude < hitRange )
+        {
+            GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+            if (attackTimer > attackDelay)
+                StartCoroutine(Attack());
+        }
         else if (playerDistance.magnitude < engageRange && attacking == false)
             Chase();
         else if (moveTimer > paceDuration && attacking == false)
             Pace();
         else if(attacking == false)
         {
+            GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
             moveTimer += Time.deltaTime;
             GetComponent<Rigidbody2D>().velocity = moveDir * moveSpeed;
+        }
+        if(GameObject.Find("Player").GetComponent<PlayerCollision>().bossStart == true && gameObject.name == "Boss")
+        {
+            canvas.enabled = true;
+            slider.maxValue = GetComponent<EnemyHealth>().maxHealth;
+            slider.value = GetComponent<EnemyHealth>().currentHealth;
         }
     }
     #endregion
@@ -98,6 +119,7 @@ public class ToadEnemyAI : MonoBehaviour
     #region PACE FUNCTION
     void Pace()
     {
+        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
         moveDir *= -1;
         Vector3 theScale = transform.localScale;
         theScale.x *= -1;
@@ -108,6 +130,7 @@ public class ToadEnemyAI : MonoBehaviour
     #region CHASE FUNCTION
     void Chase()
     {
+        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
         if (player.transform.position.x - gameObject.transform.position.x > 0 && moveDir != new Vector2(1, 0))
         {
             moveDir = new Vector2(1, 0);

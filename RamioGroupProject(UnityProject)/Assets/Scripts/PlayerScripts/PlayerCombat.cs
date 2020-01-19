@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 #endregion
 public class PlayerCombat : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public class PlayerCombat : MonoBehaviour
     [Header("Ranged Attack Settings")]
     public Transform firePoint;
     public GameObject arrowPrefab;
+    public float arrowsLeft = 10;
+    public Text arrowsLeftText;
     [Header("Delay Settings")]
     public float attackDelay = 2;
     public float attackTimer;
@@ -28,7 +31,11 @@ public class PlayerCombat : MonoBehaviour
     #endregion
     //UNITY FUNCTIONS
     #region START FUNCTION
-    void Start(){animator = GetComponent<Animator>();}
+    void Start()
+    {
+        animator = GetComponent<Animator>();
+        arrowsLeftText.text = "x" + arrowsLeft;
+    }
     #endregion
     #region UPDATE FUNCTION
     void Update()
@@ -71,10 +78,13 @@ public class PlayerCombat : MonoBehaviour
             attackTimer = 0;
         }
         //Shoot
-        if (weapon.weaponType == Weapon.Weapons.bow)
+        if (weapon.weaponType == Weapon.Weapons.bow && arrowsLeft > 0)
         {
+            attackTimer = 0;
             animator.SetTrigger("Shoot");
             yield return new WaitForSeconds(shootAnimationDuration);
+            arrowsLeft--;
+            arrowsLeftText.text = "x" + arrowsLeft;
             GameObject arrow = Instantiate(arrowPrefab, firePoint.position, firePoint.rotation);
             Vector2 shootDir;
             if(GetComponent<PlayerMovement>().facingRight)
@@ -89,7 +99,6 @@ public class PlayerCombat : MonoBehaviour
             }
             else
                 arrow.AddComponent<ArrowScript>().attackDamage = attackDamage;
-            attackTimer = 0;
         }
     }
     #endregion

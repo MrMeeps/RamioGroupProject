@@ -6,7 +6,7 @@ public class EnemyHealth : MonoBehaviour
     #region VARIABLES
     [Header("Health Settings")]
     public int maxHealth = 5;
-    int currentHealth;
+    public int currentHealth;
     #endregion
     //UNITY FUNCTIONS
     #region START FUNCTION
@@ -26,6 +26,9 @@ public class EnemyHealth : MonoBehaviour
         currentHealth -= damage;
         if (currentHealth <= 0)
             Destroy(gameObject);
+        try { GetComponent<ToadEnemyAI>().canvas.enabled = false; }
+        catch { }
+
     }
     #endregion
 }
