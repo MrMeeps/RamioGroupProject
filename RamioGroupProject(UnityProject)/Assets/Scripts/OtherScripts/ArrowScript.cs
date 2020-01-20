@@ -29,6 +29,11 @@ public class ArrowScript : MonoBehaviour
     }
     #endregion
     #region ON COLLISION ENTER 2D FUNCTION
-    void OnCollisionEnter2D(Collision2D collision) { Destroy(gameObject); }
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.GetComponent<EnemyHealth>() != null)
+            collision.gameObject.GetComponent<EnemyHealth>().TakeDamage(attackDamage);
+        Destroy(gameObject); 
+    }
     #endregion
 }

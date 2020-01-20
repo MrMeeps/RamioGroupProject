@@ -368,7 +368,7 @@ Transform:
   - {fileID: 918383643}
   - {fileID: 1134261187}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &302921158
 GameObject:
@@ -784,7 +784,7 @@ Transform:
   - {fileID: 1284674598}
   - {fileID: 104181684}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &606126437 stripped
 GameObject:
@@ -1235,7 +1235,7 @@ Transform:
   - {fileID: 1221650996}
   - {fileID: 2039405422}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1221650995
 GameObject:
@@ -4372,6 +4372,11 @@ PrefabInstance:
       propertyPath: playerAC
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 8951128311240304072, guid: 8950f5268d558b449b848f81f8a33641,
+        type: 3}
+      propertyPath: doggoAnim
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8951128311240304074, guid: 8950f5268d558b449b848f81f8a33641,
         type: 3}
       propertyPath: animator
@@ -4729,7 +4734,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1793044603
 GameObject:
@@ -5671,7 +5676,7 @@ Transform:
   - {fileID: 2054116389}
   - {fileID: 1984352634}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2998568111001486289
 PrefabInstance:

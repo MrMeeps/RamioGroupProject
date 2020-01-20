@@ -72,6 +72,7 @@
     <Compile Include="Assets\Scripts\OtherScripts\Parallax.cs" />
     <Compile Include="Assets\Scripts\OtherScripts\UIScript.cs" />
     <Compile Include="Assets\Scripts\OtherScripts\Weapon.cs" />
+    <Compile Include="Assets\Scripts\PlayerScripts\Ending.cs" />
     <Compile Include="Assets\Scripts\PlayerScripts\PlayerCollision.cs" />
     <Compile Include="Assets\Scripts\PlayerScripts\PlayerCombat.cs" />
     <Compile Include="Assets\Scripts\PlayerScripts\PlayerLight.cs" />

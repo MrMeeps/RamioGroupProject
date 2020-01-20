@@ -54,13 +54,15 @@ public class PlayerMovement : MonoBehaviour
             GetComponent<Rigidbody2D>().velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
         //Movement
         animator.SetBool("grounded", grounded);
-        doggoAnim.SetBool("grounded", grounded);
+        if(doggo == true)
+            doggoAnim.SetBool("grounded", grounded);
         float moveX = Input.GetAxis("Horizontal");
         if (movementOn == true)
         {
             Vector2 velocity = GetComponent<Rigidbody2D>().velocity;
             velocity.x = moveSpeed * moveX;
-            GetComponent<Rigidbody2D>().velocity = velocity;
+            if(GetComponent<Rigidbody2D>().bodyType == RigidbodyType2D.Dynamic)
+                GetComponent<Rigidbody2D>().velocity = velocity;
             animator.SetFloat("x", velocity.x);
             animator.SetFloat("y", velocity.y);
             if(doggo == true)
@@ -125,9 +127,11 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(2f);
         movementOn = true;
         onStart = false;
-        GameObject dog = GameObject.Find("Player/Doggo");
-        dog.GetComponent<Collider2D>().isTrigger = false;
-        dog.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+        if (doggo == true)
+        {
+            GameObject dog = GameObject.Find("Player/Doggo");
+            dog.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;       
+        }
     }
     #endregion
 }
